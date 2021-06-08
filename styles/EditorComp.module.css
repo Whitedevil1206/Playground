@@ -1,0 +1,25 @@
+.btn button {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  margin-left: 2px;
+  margin-right: 2px;
+  border: none;
+  padding: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 5% 5% 0 0;
+}
+
+.btn button:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.btn button:disabled {
+  background: rgba(0, 0, 0, 0.8);
+  cursor: default;
+}
+
+.editorpanel {
+  width: 100%;
+}
