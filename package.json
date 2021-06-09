@@ -13,7 +13,6 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-split-pane": "^0.1.92",
-    "uuid": "^8.3.2",
     "xterm-for-react": "^1.0.4"
   },
   "devDependencies": {

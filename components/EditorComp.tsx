@@ -1,10 +1,8 @@
 import Editor from '@monaco-editor/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import SplitPane from 'react-split-pane';
-import { XTerm } from 'xterm-for-react';
 import styles from '../styles/EditorComp.module.css';
 import FileComp from './FileComp';
-import Terminal from './Terminal';
 import dynamic from 'next/dynamic';
 
 type File = {
@@ -47,12 +45,13 @@ const EditorComp: React.FC<Props> = ({ files, id }) => {
         body: JSON.stringify(newData),
       }
     );
+    sessionStorage.setItem('idcr', id as string);
+    localStorage.setItem('idr', id as string);
     const data = await res.json();
     setInstaColour('lightgreen');
-    console.log(data);
   };
 
-  function handleEditorChange(value, event) {
+  function handleEditorChange(value: string, event) {
     instaSaveData.current = instaSaveData.current.map((item) => {
       if (item.name == file.name) {
         return Object.assign({}, item, {
@@ -92,13 +91,13 @@ const EditorComp: React.FC<Props> = ({ files, id }) => {
     saveToDb();
   }
 
-  function addFile(newfile) {
+  function addFile(newfile: File) {
     instaSaveData.current.push(newfile);
     setFileName(newfile.name);
     setNof(instaSaveData.current.length);
   }
 
-  function deleteFile(name) {
+  function deleteFile(name: string) {
     instaSaveData.current = instaSaveData.current.filter(
       (item) => item.name !== name
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { XTerm } from 'xterm-for-react';
 
-const Terminal = () => {
+const Terminal: React.FC = () => {
   const xtermRef = React.useRef(null);
   const [input, setInput] = React.useState('');
 

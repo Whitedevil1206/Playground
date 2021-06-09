@@ -1,8 +1,9 @@
 import React from 'react';
 
 import Head from 'next/head';
+import Link from 'next/link';
 
-const Playground = () => {
+const PlaygroundHome: React.FC = () => {
   return (
     <div className="container">
       <Head>
@@ -11,10 +12,12 @@ const Playground = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h3>Hello from home</h3>
-      <p>hiiiii</p>
+      <h2>This page is currently not available .</h2>
+      <Link href="/">
+        <a>Go Back</a>
+      </Link>
     </div>
   );
 };
 
-export default Playground;
+export default PlaygroundHome;

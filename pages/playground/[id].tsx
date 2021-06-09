@@ -2,10 +2,16 @@ import React from 'react';
 import EditorComp from '../../components/EditorComp';
 import { useRouter } from 'next/router';
 
-const Playground = () => {
+type File = {
+  name: string;
+  language: string;
+  value: string;
+};
+
+const Playground: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [filesData, setFilesData] = React.useState(null);
+  const [filesData, setFilesData] = React.useState<null | File[]>(null);
 
   const getFileData = async () => {
     if (sessionStorage.getItem('idcr') !== id) {
@@ -13,7 +19,6 @@ const Playground = () => {
         `https://playgroundserv.herokuapp.com/databaseR/${id}`
       );
       const data = await res.json();
-      if (typeof id === 'string') sessionStorage.setItem('idcr', id);
       setFilesData(data.allFiles);
     } else {
       const res = await fetch(
@@ -28,7 +33,6 @@ const Playground = () => {
     if (!id) {
       return;
     }
-    console.log('id', id);
     getFileData();
   }, [id]);
 

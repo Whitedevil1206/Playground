@@ -1,8 +1,33 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-export default function Home() {
+export default function Home(): React.ReactNode {
+  const router = useRouter();
+  const [sessionId, setSessionId] = React.useState('');
+  const [mainFeedback, setMainFeedback] = React.useState('Create & Join Room');
+
+  const handleClick = async () => {
+    setMainFeedback('Setting Up ...');
+    const res = await fetch(
+      'https://playgroundserv.herokuapp.com/databaseR/createRoom'
+    );
+    const data = await res.json();
+    if (data._id) {
+      localStorage.setItem('idr', data._id);
+      router.push(`/playground/${data._id}`);
+    } else {
+      console.log('Error occured while creating Room');
+    }
+  };
+
+  const handlePrevSession = () => {
+    setSessionId(localStorage.getItem('idr'));
+    console.log(sessionId);
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,7 +36,46 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h4>Connecting you to server...</h4>
+      <div className={styles.content}>
+        <h1>C & S</h1>
+        <h2>/* Code , Edit , Share */</h2>
+        <button onClick={handleClick}>{mainFeedback}</button>
+      </div>
+      <div className={styles.content2}>
+        <h1>Your previous Rooms</h1>
+        <h4 style={{ color: 'red' }} onClick={handlePrevSession}>
+          Click to get
+        </h4>
+        <Link href={'/playground/' + sessionId}>
+          <a>Prev. Session: {sessionId}</a>
+        </Link>
+        <h2>Languages Supported with IntelliSense</h2>
+        <p>// HTML ; CSS ; JS ; TS //</p>
+        <h3>Save & Share</h3>
+        <p>Click on SAVE to save your files and SHARE the link </p>
+      </div>
+      <div className={styles.content3}>
+        <h1> NOTE: </h1>
+        <p>
+          Session Room is the room you were working on recently , you can save
+          your files if you forgot to save them before as it is kept stored for
+          some time.
+        </p>
+        <p>
+          Playground also has a terminal but as of now it can execute only two
+          commands: cls & date.
+        </p>
+        <p>
+          Files with extension .py .java .go .cpp .scss .php can also be added
+          but there is no intellisense support to them.
+        </p>
+        <p>
+          Color changing pallette beside SAVE button in playground indicates
+          status of InstaSave , green indicates your files are saved temporarily
+          in backend which is accessible from the same session
+        </p>
+      </div>
+      <footer className={styles.foot}>Thanks for visiting.</footer>
     </div>
   );
 }

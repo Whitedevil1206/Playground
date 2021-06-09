@@ -9,9 +9,9 @@ type File = {
 
 type Props = {
   files: File[];
-  setter: any;
-  fileAdder: any;
-  fileDeleter: any;
+  setter: (x: string) => void;
+  fileAdder: (x: File) => void;
+  fileDeleter: (x: string) => void;
   currentFile: File;
 };
 
@@ -25,19 +25,18 @@ const FileComp: React.FC<Props> = ({
   const [inputBx, setInputBx] = React.useState(false);
   const [inputData, setInputData] = React.useState('');
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setInputData(e.target.value);
   };
 
-  const handleDelete = (name) => {
+  const handleDelete = (name: string) => {
     fileDeleter(name);
   };
 
   const handleSubmit = () => {
     let regex = /[^\\]*\.(\w+)$/;
-    let file = {};
+    let file: File | {} = {};
     let total = inputData.match(regex);
-    console.log(total[1]);
     if (total[1] == 'js') {
       file = {
         name: inputData,
@@ -108,7 +107,7 @@ const FileComp: React.FC<Props> = ({
         value: '',
       };
     }
-    fileAdder(file);
+    fileAdder(file as File);
     setInputData('');
     setInputBx(false);
   };
@@ -150,6 +149,7 @@ const FileComp: React.FC<Props> = ({
           onChange={handleChange}
         />
         <button onClick={handleSubmit}>Create File</button>
+        <button onClick={() => setInputBx(false)}>Cancel</button>
       </div>
     );
   }
