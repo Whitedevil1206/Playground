@@ -19,12 +19,15 @@ Code and Share
 - Any change in editor gets saved `temporarily` represented by `green` coloured pallette besides SAVE button
 - This prevents loss of data if refreshed or exited without explicitly saving
 - You can save `permanently` using SAVE button
-- Share it by using the editor link []
+- Share it by using the editor link e.g. [`https://playground-gilt.vercel.app/playground/60c18859baccf200150ab110`](https://playground-gilt.vercel.app/playground/60c18859baccf200150ab110) 
 
 #### Terminal
 
 As of now it can execute only `cls` and `date` cmd. More features to be added soon.
 
+#### Note
+
+This is currently not supported on mobile web frameworks
 
 ## Contribution
 
