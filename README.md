@@ -31,6 +31,6 @@ This is currently not supported on mobile web frameworks
 
 ## Contribution
 
-Backend Node.js api is on the `server` branch
+Backend Node.js api is on the `api` branch
 
 Feel free to contribute to this project !
